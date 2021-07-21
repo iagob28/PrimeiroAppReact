@@ -5,9 +5,13 @@ class ListaDeNotas extends Component {
   constructor() {
     super();
     this.state = { notas: [] };
+    this._novaNota = this._novaNota.bind(this);
   }
   componentDidMount() {
-    this.props.notas.inscrever(this._novaNota.bind(this));
+    this.props.notas.inscrever(this._novaNota);
+  }
+  componentWillUnmount() {
+    this.props.notas.desinscrever(this._novaNota);
   }
   _novaNota(notas) {
     this.setState({ ...this.state, notas });
